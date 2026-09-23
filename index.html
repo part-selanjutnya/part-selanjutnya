@@ -4,39 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membuka Shopee...</title>
-    
-    <!-- Referrer Policy wajib agar data tracking cookie affiliate tetap terbaca -->
     <meta name="referrer" content="no-referrer-when-downgrade">
     
     <!-- Meta refresh fallback -->
-    <meta http-equiv="refresh" content="1;url=https://s.shopee.co.id/W6sq4aPdA">
+    <meta http-equiv="refresh" content="1;url=https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905">
 
     <script>
         (function() {
-            // Target Link Affiliate Shopee Baru Anda
-            var targetUrl = "https://s.shopee.co.id/W6sq4aPdA";
+            // Link Wrapping resmi dengan origin_link ter-encode dan affiliate_id
+            var targetUrl = "https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
             
-            // Eksekusi redirect otomatis
-            window.location.href = targetUrl;
-            
-            // Cadangan redirect jika JS tertahan oleh browser
-            setTimeout(function() {
-                window.location.replace(targetUrl);
-            }, 300);
+            // Deteksi In-App Browser (Facebook, Instagram, dll)
+            var isWebView = /FBAN|FBAV|Instagram/i.test(navigator.userAgent);
+
+            if (!isWebView) {
+                window.location.href = targetUrl;
+            } else {
+                setTimeout(function() {
+                    window.location.href = targetUrl;
+                }, 400);
+            }
         })();
     </script>
 </head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-align: center; padding-top: 60px; background-color: #f8f9fa; color: #333;">
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-align: center; padding-top: 50px; background-color: #f8f9fa; color: #333;">
     
-    <div style="max-width: 400px; margin: 0 auto; padding: 20px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-        <p style="font-size: 16px; font-weight: 500; margin-bottom: 20px;">Sedang mengalihkan ke Shopee...</p>
+    <div style="max-width: 380px; margin: 0 auto; padding: 20px; background: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="font-size: 15px; font-weight: 600; margin-bottom: 15px;">Mengarahkan ke Aplikasi Shopee...</p>
         
-        <!-- Tombol Manual -->
-        <a href="https://s.shopee.co.id/W6sq4aPdA" 
-           rel="noopener" 
-           referrerpolicy="no-referrer-when-downgrade"
-           style="display: inline-block; padding: 12px 24px; background-color: #ee4d2d; color: #ffffff; font-weight: bold; text-decoration: none; border-radius: 8px; font-size: 15px;">
-           Klik Di Sini Jika Tidak Terbuka
+        <a href="https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905" 
+           rel="noopener"
+           style="display: block; padding: 12px; background-color: #ee4d2d; color: #ffffff; font-weight: bold; text-decoration: none; border-radius: 6px; font-size: 14px;">
+           Buka Produk Di Sini
         </a>
     </div>
 
