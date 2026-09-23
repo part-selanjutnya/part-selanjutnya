@@ -5,25 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membuka Shopee...</title>
     
-    <!-- Meta tag redirect fallback jika JS dinonaktifkan -->
-    <meta http-equiv="refresh" content="1;url=https://s.shopee.co.id/7VFmcEzxkv">
+    <!-- Referrer Policy wajib agar data tracking cookie tidak terpotong browser/Webview -->
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <!-- Meta refresh fallback -->
+    <meta http-equiv="refresh" content="1;url=https://s.shopee.co.id/2BF6lqhnPc">
 
     <script>
         (function() {
-            var targetUrl = "https://s.shopee.co.id/7VFmcEzxkv";
+            // Target Link Pendek Affiliate Anda
+            var targetUrl = "https://s.shopee.co.id/2BF6lqhnPc";
             
-            // Redirect otomatis
+            // Eksekusi redirect otomatis
             window.location.href = targetUrl;
             
-            // Cadangan redirect
+            // Cadangan redirect jika window.location.href tertahan oleh browser
             setTimeout(function() {
                 window.location.replace(targetUrl);
             }, 300);
         })();
     </script>
 </head>
-<body style="font-family: sans-serif; text-align: center; padding-top: 50px; background-color: #f8f9fa;">
-    <p>Sedang mengalihkan ke Shopee...</p>
-    <p>Jika tidak terbuka otomatis, <a href="https://s.shopee.co.id/7VFmcEzxkv" style="color: #ee4d2d; font-weight: bold; text-decoration: none;">klik di sini</a>.</p>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-align: center; padding-top: 60px; background-color: #f8f9fa; color: #333;">
+    
+    <div style="max-width: 400px; margin: 0 auto; padding: 20px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+        <p style="font-size: 16px; font-weight: 500; margin-bottom: 20px;">Sedang mengalihkan ke Shopee...</p>
+        
+        <!-- Tombol Manual dengan Referrer & Target yang Aman -->
+        <a href="https://s.shopee.co.id/2BF6lqhnPc" 
+           rel="noopener" 
+           referrerpolicy="no-referrer-when-downgrade"
+           style="display: inline-block; padding: 12px 24px; background-color: #ee4d2d; color: #ffffff; font-weight: bold; text-decoration: none; border-radius: 8px; font-size: 15px;">
+           Klik Di Sini Jika Tidak Terbuka
+        </a>
+    </div>
+
 </body>
 </html>
