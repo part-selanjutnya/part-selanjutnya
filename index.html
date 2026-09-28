@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Membuka Shopee...</title>
+    <title>Mengarahkan ke Shopee...</title>
     <meta name="referrer" content="no-referrer-when-downgrade">
-    
+
+    <!-- ========================================================= -->
+    <!-- OPEN GRAPH META TAGS (TANPA GAMBAR)                        -->
+    <!-- ========================================================= -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://part-selanjutnya.github.io/part-selanjutnya/">
+    <meta property="og:site_name" content="S.SHOPEE.CO.ID">
+    <meta property="og:title" content="Jual Gift Box Tas Wanita Buket Mini Kartu Ucapan">
+    <meta property="og:description" content="Klik untuk membuka produk di aplikasi Shopee">
+
     <!-- Meta refresh fallback -->
     <meta http-equiv="refresh" content="1;url=https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905">
 
+    <!-- Script redirect Shopee Affiliate -->
     <script>
         (function() {
-            // Link Wrapping resmi dengan origin_link ter-encode dan affiliate_id
             var targetUrl = "https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
-            
-            // Deteksi In-App Browser (Facebook, Instagram, dll)
             var isWebView = /FBAN|FBAV|Instagram/i.test(navigator.userAgent);
 
             if (!isWebView) {
