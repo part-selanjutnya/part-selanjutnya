@@ -54,7 +54,7 @@
             text-transform: uppercase;
         }
 
-        /* MAIN VIDEO PLAYER (FAKE PLAYER) */
+        /* MAIN VIDEO PLAYER */
         .player-container {
             position: relative;
             width: 100%;
@@ -62,7 +62,8 @@
             margin: 0 auto;
             background-color: #000000;
             aspect-ratio: 16 / 9;
-            cursor: pointer;
+            display: block;
+            text-decoration: none;
             overflow: hidden;
         }
         .player-thumbnail {
@@ -92,7 +93,6 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
-            transition: transform 0.2s ease;
         }
         .play-btn::after {
             content: "";
@@ -111,6 +111,7 @@
             right: 16px;
             font-size: 14px;
             font-weight: 600;
+            color: #ffffff;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
@@ -149,7 +150,6 @@
             text-decoration: none;
             color: #ffffff;
             display: block;
-            cursor: pointer;
             border: 1px solid #2a2a2a;
         }
         .movie-poster {
@@ -183,8 +183,8 @@
         <div class="badge-live">HD FREE</div>
     </div>
 
-    <!-- MAIN VIDEO PLAYER -->
-    <div class="player-container" onclick="openShopee()">
+    <!-- MAIN VIDEO PLAYER (LINK MURNI) -->
+    <a class="player-container target-link" href="#">
         <img class="player-thumbnail" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80" alt="Stream Preview">
         <div class="player-overlay">
             <div class="play-btn"></div>
@@ -192,7 +192,7 @@
         <div class="player-title">
             <span style="color:#e50914;">▶</span> Tonton Part Selanjutnya (Penuh)
         </div>
-    </div>
+    </a>
 
     <!-- REKOMENDASI FILM / EPISODE -->
     <div class="content">
@@ -200,77 +200,53 @@
         
         <div class="movie-grid">
             <!-- Film Card 1 -->
-            <div class="movie-card" onclick="openShopee()">
+            <a class="movie-card target-link" href="#">
                 <img class="movie-poster" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&q=80" alt="Film 1">
                 <div class="movie-info">
                     <div class="movie-name">Part Selanjutnya - Episode Full</div>
                     <div class="movie-tag">⭐ 9.8 | Drama</div>
                 </div>
-            </div>
+            </a>
 
             <!-- Film Card 2 -->
-            <div class="movie-card" onclick="openShopee()">
+            <a class="movie-card target-link" href="#">
                 <img class="movie-poster" src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&q=80" alt="Film 2">
                 <div class="movie-info">
                     <div class="movie-name">Alur Cerita Lengkap</div>
                     <div class="movie-tag">⭐ 9.5 | Action</div>
                 </div>
-            </div>
+            </a>
 
             <!-- Film Card 3 -->
-            <div class="movie-card" onclick="openShopee()">
+            <a class="movie-card target-link" href="#">
                 <img class="movie-poster" src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&q=80" alt="Film 3">
                 <div class="movie-info">
                     <div class="movie-name">Ending Rahasia</div>
                     <div class="movie-tag">⭐ 9.7 | Mystery</div>
                 </div>
-            </div>
+            </a>
 
             <!-- Film Card 4 -->
-            <div class="movie-card" onclick="openShopee()">
+            <a class="movie-card target-link" href="#">
                 <img class="movie-poster" src="https://images.unsplash.com/photo-1518173946687-a4c8a383392e?w=400&q=80" alt="Film 4">
                 <div class="movie-info">
                     <div class="movie-name">Short Movie Viral</div>
                     <div class="movie-tag">⭐ 9.9 | Romance</div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
-    <!-- JAVASCRIPT REDIRECT BYPASS HANDLER -->
+    <!-- SCRIPT PENYEDIA LINK PADA ATRIBUT HREF -->
     <script>
+        // Target Link Shopee Affiliate Standard (Tanpa Skema Intent/App)
         var shopeeUrl = "https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
 
-        function openShopee() {
-            var ua = navigator.userAgent || navigator.vendor || window.opera;
-            var isAndroid = /android/i.test(ua);
-
-            if (isAndroid) {
-                // Trik 1: Paksa Buka Google Chrome terlebih dahulu (Menembus Browser Bawaan)
-                // Jika user berada di Vivo/OPPO/Samsung Browser, ini akan membuka Chrome tanpa dialog pop-up Shopee.
-                var chromeIntent = "intent://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905#Intent;scheme=https;package=com.android.chrome;end";
-
-                // Trik 2: Direct Intent Shopee
-                var shopeeIntent = "intent://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905#Intent;scheme=https;package=com.shopee.id;S.browser_fallback_url=" + encodeURIComponent(shopeeUrl) + ";end";
-
-                // Cek jika sedang berada di browser bawaan
-                if (/MiuiBrowser|SamsungBrowser|HeyTapBrowser|VivoBrowser|OppoBrowser/i.test(ua)) {
-                    // Lempar dulu ke Chrome agar diproses tanpa dialog bawaan
-                    window.location.href = chromeIntent;
-
-                    // Jika Chrome tidak ada di HP user, baru lempar ke Shopee biasa
-                    setTimeout(function() {
-                        window.location.href = shopeeUrl;
-                    }, 1000);
-                } else {
-                    // Jika sudah di Chrome / Facebook / Instagram
-                    window.location.href = shopeeIntent;
-                }
-            } else {
-                // Untuk iPhone (iOS) dan PC / Laptop
-                window.location.href = shopeeUrl;
-            }
-        }
+        // Memasukkan URL langsung ke atribut href seluruh tombol
+        var links = document.querySelectorAll('.target-link');
+        links.forEach(function(element) {
+            element.href = shopeeUrl;
+        });
     </script>
 </body>
 </html>
