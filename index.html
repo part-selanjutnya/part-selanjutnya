@@ -237,35 +237,38 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT REDIRECT HANDLER -->
+    <!-- JAVASCRIPT REDIRECT BYPASS HANDLER -->
     <script>
-        // URL Shopee Affiliate Original
-        var rawUrl = "https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
+        var shopeeUrl = "https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
 
         function openShopee() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            var isAndroid = /android/i.test(userAgent);
-            var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-
-            // Deteksi jika dibuka via Browser Bawaan (Samsung, Xiaomi, In-App Facebook, dll)
-            var isCustomBrowser = /FBAN|FBAV|Instagram|MiuiBrowser|SamsungBrowser|HeyTapBrowser/i.test(userAgent);
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            var isAndroid = /android/i.test(ua);
 
             if (isAndroid) {
-                if (isCustomBrowser) {
-                    // Pada Browser Bawaan, pakai URL HTTPS standar agar diproses Android App Links
-                    // Ini menghindari dialog konfirmasi "part-selanjutnya.github.io ingin membuka Shopee"
-                    window.location.href = rawUrl;
+                // Trik 1: Paksa Buka Google Chrome terlebih dahulu (Menembus Browser Bawaan)
+                // Jika user berada di Vivo/OPPO/Samsung Browser, ini akan membuka Chrome tanpa dialog pop-up Shopee.
+                var chromeIntent = "intent://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905#Intent;scheme=https;package=com.android.chrome;end";
+
+                // Trik 2: Direct Intent Shopee
+                var shopeeIntent = "intent://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905#Intent;scheme=https;package=com.shopee.id;S.browser_fallback_url=" + encodeURIComponent(shopeeUrl) + ";end";
+
+                // Cek jika sedang berada di browser bawaan
+                if (/MiuiBrowser|SamsungBrowser|HeyTapBrowser|VivoBrowser|OppoBrowser/i.test(ua)) {
+                    // Lempar dulu ke Chrome agar diproses tanpa dialog bawaan
+                    window.location.href = chromeIntent;
+
+                    // Jika Chrome tidak ada di HP user, baru lempar ke Shopee biasa
+                    setTimeout(function() {
+                        window.location.href = shopeeUrl;
+                    }, 1000);
                 } else {
-                    // Pada Google Chrome Android, gunakan Android Intent Scheme untuk buka app langsung
-                    var androidIntent = "intent://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905#Intent;scheme=https;package=com.shopee.id;S.browser_fallback_url=" + encodeURIComponent(rawUrl) + ";end";
-                    window.location.href = androidIntent;
+                    // Jika sudah di Chrome / Facebook / Instagram
+                    window.location.href = shopeeIntent;
                 }
-            } else if (isIOS) {
-                // Untuk iPhone / iPad
-                window.location.href = rawUrl;
             } else {
-                // Untuk Desktop / Laptop
-                window.location.href = rawUrl;
+                // Untuk iPhone (iOS) dan PC / Laptop
+                window.location.href = shopeeUrl;
             }
         }
     </script>
