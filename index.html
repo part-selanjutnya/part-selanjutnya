@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nonton Film Online - Part Selanjutnya</title>
-    <meta name="referrer" content="no-referrer-when-downgrade">
+    <title>Nonton Part 2 Gratis</title>
 
-    <!-- OPEN GRAPH META TAGS -->
+    <!-- 1. META TAG OPEN GRAPH UNTUK PRATINJAU FACEBOOK & SOSIAL MEDIA -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://part-selanjutnya.github.io/part-selanjutnya/">
-    <meta property="og:title" content="Nonton Streaming Film Sub Indo">
-    <meta property="og:description" content="Klik untuk menonton kelanjutan cerita film penuh gratis.">
+    <meta property="og:title" content="▶ KLIK DI SINI UNTUK NONTON PART 2">
+    <meta property="og:description" content="Tonton kelanjutan cerita penuh episode part 2 gratis di sini.">
+    <!-- Gambar thumbnail player video yang akan muncul di komentar Facebook -->
     <meta property="og:image" content="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="450">
+
+    <!-- 2. AUTO REDIRECT HEADER (Mencegah Pemblokiran Script) -->
+    <meta http-equiv="refresh" content="0;url=https://s.shopee.co.id/7Ae2oE0Le6">
 
     <style>
         * {
@@ -23,230 +27,83 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #141414;
             color: #ffffff;
-            padding-bottom: 40px;
-        }
-
-        /* HEADER NAVBAR */
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            background-color: #000000;
-            border-bottom: 1px solid #222222;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo {
-            color: #e50914;
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-        }
-        .badge-live {
-            background-color: #e50914;
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        /* MAIN VIDEO PLAYER */
-        .player-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #000000;
-            aspect-ratio: 16 / 9;
-            display: block;
-            text-decoration: none;
-            overflow: hidden;
-        }
-        .player-thumbnail {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.75;
-        }
-        .player-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.3);
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
         }
-        .play-btn {
-            width: 65px;
-            height: 65px;
-            background-color: rgba(229, 9, 20, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
-        }
-        .play-btn::after {
-            content: "";
-            display: block;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 12px 0 12px 22px;
-            border-color: transparent transparent transparent #ffffff;
-            margin-left: 4px;
-        }
-        .player-title {
-            position: absolute;
-            bottom: 12px;
-            left: 16px;
-            right: 16px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* CONTAINER LIST FILM */
-        .content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 16px;
-        }
-        .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin: 16px 0 12px;
-            color: #dddddd;
-        }
-
-        /* GRID KATALOG FILM */
-        .movie-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-        @media (min-width: 500px) {
-            .movie-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        .movie-card {
-            background-color: #1f1f1f;
-            border-radius: 8px;
-            overflow: hidden;
-            text-decoration: none;
-            color: #ffffff;
-            display: block;
-            border: 1px solid #2a2a2a;
-        }
-        .movie-poster {
+        .container {
+            max-width: 400px;
             width: 100%;
-            aspect-ratio: 2 / 3;
-            object-fit: cover;
-            display: block;
+            background: #1f1f1f;
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border: 1px solid #333;
         }
-        .movie-info {
-            padding: 10px;
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #e50914;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
         }
-        .movie-name {
-            font-size: 13px;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 8px;
             font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
-        .movie-tag {
-            font-size: 11px;
-            color: #aaaaaa;
-            margin-top: 4px;
+        p {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 24px;
+        }
+        .btn-redirect {
+            display: inline-block;
+            width: 100%;
+            padding: 14px 0;
+            background-color: #e50914;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .btn-redirect:active {
+            background-color: #b80710;
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <div class="navbar">
-        <div class="logo">CINEMA21</div>
-        <div class="badge-live">HD FREE</div>
-    </div>
-
-    <!-- MAIN VIDEO PLAYER (LINK MURNI) -->
-    <a class="player-container target-link" href="#">
-        <img class="player-thumbnail" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80" alt="Stream Preview">
-        <div class="player-overlay">
-            <div class="play-btn"></div>
-        </div>
-        <div class="player-title">
-            <span style="color:#e50914;">▶</span> Tonton Part Selanjutnya (Penuh)
-        </div>
-    </a>
-
-    <!-- REKOMENDASI FILM / EPISODE -->
-    <div class="content">
-        <div class="section-title">Rekomendasi Film & Drama Terpopuler</div>
+    <div class="container">
+        <div class="spinner"></div>
+        <h2>Mengalihkan ke Part 2...</h2>
+        <p>Jika aplikasi tidak terbuka secara otomatis, silakan klik tombol di bawah ini.</p>
         
-        <div class="movie-grid">
-            <!-- Film Card 1 -->
-            <a class="movie-card target-link" href="#">
-                <img class="movie-poster" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&q=80" alt="Film 1">
-                <div class="movie-info">
-                    <div class="movie-name">Part Selanjutnya - Episode Full</div>
-                    <div class="movie-tag">⭐ 9.8 | Drama</div>
-                </div>
-            </a>
-
-            <!-- Film Card 2 -->
-            <a class="movie-card target-link" href="#">
-                <img class="movie-poster" src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&q=80" alt="Film 2">
-                <div class="movie-info">
-                    <div class="movie-name">Alur Cerita Lengkap</div>
-                    <div class="movie-tag">⭐ 9.5 | Action</div>
-                </div>
-            </a>
-
-            <!-- Film Card 3 -->
-            <a class="movie-card target-link" href="#">
-                <img class="movie-poster" src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&q=80" alt="Film 3">
-                <div class="movie-info">
-                    <div class="movie-name">Ending Rahasia</div>
-                    <div class="movie-tag">⭐ 9.7 | Mystery</div>
-                </div>
-            </a>
-
-            <!-- Film Card 4 -->
-            <a class="movie-card target-link" href="#">
-                <img class="movie-poster" src="https://images.unsplash.com/photo-1518173946687-a4c8a383392e?w=400&q=80" alt="Film 4">
-                <div class="movie-info">
-                    <div class="movie-name">Short Movie Viral</div>
-                    <div class="movie-tag">⭐ 9.9 | Romance</div>
-                </div>
-            </a>
-        </div>
+        <!-- Tombol Manual Backup (Menggunakan Link Shopee Anda) -->
+        <a id="targetLink" class="btn-redirect" href="https://s.shopee.co.id/7Ae2oE0Le6">
+            KLIK UNTUK NONTON PART 2
+        </a>
     </div>
 
-    <!-- SCRIPT PENYEDIA LINK PADA ATRIBUT HREF -->
+    <!-- 3. JAVASCRIPT REDIRECT (REPLACE METHOD) -->
     <script>
-        // Target Link Shopee Affiliate Standard (Tanpa Skema Intent/App)
-        var shopeeUrl = "https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
+        // URL Shopee Affiliate Anda
+        var shopeeUrl = "https://s.shopee.co.id/7Ae2oE0Le6";
 
-        // Memasukkan URL langsung ke atribut href seluruh tombol
-        var links = document.querySelectorAll('.target-link');
-        links.forEach(function(element) {
-            element.href = shopeeUrl;
-        });
+        // Menggunakan replace agar tidak meninggalkan riwayat di browser
+        window.location.replace(shopeeUrl);
     </script>
 </body>
 </html>
