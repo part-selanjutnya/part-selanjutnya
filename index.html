@@ -26,14 +26,14 @@
             padding-bottom: 40px;
         }
 
-        /* HEADER */
+        /* HEADER NAVBAR */
         .navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 12px 16px;
-            background-color: #000;
-            border-bottom: 1px solid #222;
+            background-color: #000000;
+            border-bottom: 1px solid #222222;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -46,7 +46,7 @@
         }
         .badge-live {
             background-color: #e50914;
-            color: #fff;
+            color: #ffffff;
             font-size: 11px;
             font-weight: bold;
             padding: 3px 8px;
@@ -54,13 +54,13 @@
             text-transform: uppercase;
         }
 
-        /* MAIN VIDEO PLAYER SECTION */
+        /* MAIN VIDEO PLAYER (FAKE PLAYER) */
         .player-container {
             position: relative;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            background-color: #000;
+            background-color: #000000;
             aspect-ratio: 16 / 9;
             cursor: pointer;
             overflow: hidden;
@@ -81,7 +81,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
         }
         .play-btn {
             width: 65px;
@@ -111,7 +111,7 @@
             right: 16px;
             font-size: 14px;
             font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -127,10 +127,10 @@
             font-size: 16px;
             font-weight: 700;
             margin: 16px 0 12px;
-            color: #ddd;
+            color: #dddddd;
         }
 
-        /* GRID FILM */
+        /* GRID KATALOG FILM */
         .movie-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -147,7 +147,7 @@
             border-radius: 8px;
             overflow: hidden;
             text-decoration: none;
-            color: #fff;
+            color: #ffffff;
             display: block;
             cursor: pointer;
             border: 1px solid #2a2a2a;
@@ -170,7 +170,7 @@
         }
         .movie-tag {
             font-size: 11px;
-            color: #aaa;
+            color: #aaaaaa;
             margin-top: 4px;
         }
     </style>
@@ -183,7 +183,7 @@
         <div class="badge-live">HD FREE</div>
     </div>
 
-    <!-- MAIN VIDEO PLAYER (DIKLIK BUKA SHOPEE) -->
+    <!-- MAIN VIDEO PLAYER -->
     <div class="player-container" onclick="openShopee()">
         <img class="player-thumbnail" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80" alt="Stream Preview">
         <div class="player-overlay">
@@ -237,35 +237,37 @@
         </div>
     </div>
 
+    <!-- JAVASCRIPT REDIRECT HANDLER -->
     <script>
-        // Target Link Shopee Affiliate Original & Encoded
+        // URL Shopee Affiliate Original
         var rawUrl = "https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
-        
+
         function openShopee() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            var isAndroid = /android/i.test(userAgent);
+            var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
-            // 1. Android Scheme (Memaksa Aplikasi Shopee di Android)
-            var androidIntent = "intent://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905#Intent;scheme=https;package=com.shopee.id;S.browser_fallback_url=" + encodeURIComponent(rawUrl) + ";end";
+            // Deteksi jika dibuka via Browser Bawaan (Samsung, Xiaomi, In-App Facebook, dll)
+            var isCustomBrowser = /FBAN|FBAV|Instagram|MiuiBrowser|SamsungBrowser|HeyTapBrowser/i.test(userAgent);
 
-            // 2. iOS Deep Link Scheme (Memaksa Aplikasi Shopee di iPhone/iOS)
-            var iosScheme = "shopee://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
-
-            if (/android/i.test(userAgent)) {
-                // Eksekusi jika Android
-                window.location.href = androidIntent;
-            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                // Eksekusi jika iOS / iPhone
-                window.location.href = iosScheme;
-                
-                // Fallback otomatis ke web jika app Shopee di iOS belum terpasang
-                setTimeout(function() {
+            if (isAndroid) {
+                if (isCustomBrowser) {
+                    // Pada Browser Bawaan, pakai URL HTTPS standar agar diproses Android App Links
+                    // Ini menghindari dialog konfirmasi "part-selanjutnya.github.io ingin membuka Shopee"
                     window.location.href = rawUrl;
-                }, 1500);
+                } else {
+                    // Pada Google Chrome Android, gunakan Android Intent Scheme untuk buka app langsung
+                    var androidIntent = "intent://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905#Intent;scheme=https;package=com.shopee.id;S.browser_fallback_url=" + encodeURIComponent(rawUrl) + ";end";
+                    window.location.href = androidIntent;
+                }
+            } else if (isIOS) {
+                // Untuk iPhone / iPad
+                window.location.href = rawUrl;
             } else {
-                // Desktop / Browser Biasa
+                // Untuk Desktop / Laptop
                 window.location.href = rawUrl;
             }
         }
     </script>
 </body>
-    </html>
+</html>
