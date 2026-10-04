@@ -28,18 +28,35 @@
             max-width: 380px;
             background: #1f1f1f;
             border-radius: 16px;
-            padding: 30px 20px;
+            padding: 25px 20px;
             text-align: center;
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
             border: 1px solid #333;
         }
         .play-icon {
             font-size: 42px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: #ee4d2d;
         }
-        h2 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
-        p { font-size: 13px; color: #aaa; margin-bottom: 25px; line-height: 1.4; }
+        h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        p { font-size: 13px; color: #aaa; margin-bottom: 20px; line-height: 1.4; }
+        
+        /* Kotak Petunjuk Facebook Confirmation */
+        .notice-box {
+            background-color: rgba(238, 77, 45, 0.1);
+            border: 1px dashed #ee4d2d;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #ff8c75;
+            text-align: left;
+            line-height: 1.4;
+        }
+        .notice-box strong {
+            color: #ffffff;
+        }
+
         .btn-play {
             display: block;
             width: 100%;
@@ -49,7 +66,7 @@
             font-weight: bold;
             text-decoration: none;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: 15px;
             box-shadow: 0 4px 12px rgba(238, 77, 45, 0.4);
             cursor: pointer;
         }
@@ -63,7 +80,12 @@
         <h2>Part Selanjutnya Siap Diputar</h2>
         <p>Klik tombol di bawah untuk melanjutkan tontonan di aplikasi sponsor.</p>
         
-        <!-- Tombol Pemicu Deep Link / App Opener -->
+        <!-- PANDUAN UNTUK PENGUNJUNG FACEBOOK -->
+        <div class="notice-box">
+            💡 <strong>Petunjuk:</strong> Jika muncul konfirmasi <em>"Keluar dari aplikasi"</em> setelah menekan tombol, silakan klik <strong>LANJUTKAN</strong>.
+        </div>
+
+        <!-- Tombol Deep Link / App Opener -->
         <a id="appOpenerBtn" href="#" class="btn-play">
            KLIK UNTUK NONTON PART 2
         </a>
@@ -71,24 +93,21 @@
 
     <script>
         (function() {
-            // Raw URL Shopee Affiliate Anda
             var rawUrl = "s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
 
-            // Deteksi OS Perangkat Pengguna
             var ua = navigator.userAgent || navigator.vendor || window.opera;
             var isAndroid = /Android/i.test(ua);
             
             var finalDeepLink = "";
 
             if (isAndroid) {
-                // Skrip Android Intent: Memaksa Android membuka aplikasi Shopee secara native
+                // Intent khusus Android untuk memanggil aplikasi Shopee
                 finalDeepLink = "intent://" + rawUrl + "#Intent;scheme=https;package=com.shopee.id;end;";
             } else {
-                // iOS / Desktop: Menggunakan HTTPS Link Bawaan
+                // Universal Link iOS
                 finalDeepLink = "https://" + rawUrl;
             }
 
-            // Tautkan Deep Link ke Tombol
             var btn = document.getElementById("appOpenerBtn");
             if (btn) {
                 btn.href = finalDeepLink;
