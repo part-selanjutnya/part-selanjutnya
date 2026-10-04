@@ -21,53 +21,72 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 16px;
         }
         .card {
             width: 100%;
-            max-width: 380px;
+            max-width: 400px;
             background: #1f1f1f;
             border-radius: 16px;
-            padding: 25px 20px;
+            padding: 25px 18px;
             text-align: center;
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
             border: 1px solid #333;
         }
         .play-icon {
-            font-size: 42px;
-            margin-bottom: 12px;
+            font-size: 48px;
+            margin-bottom: 10px;
             color: #ee4d2d;
         }
-        h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
-        p { font-size: 13px; color: #aaa; margin-bottom: 20px; line-height: 1.4; }
-        
-        /* Kotak Petunjuk Facebook Confirmation */
-        .notice-box {
-            background-color: rgba(238, 77, 45, 0.1);
-            border: 1px dashed #ee4d2d;
-            border-radius: 8px;
-            padding: 10px 12px;
-            margin-bottom: 20px;
-            font-size: 12px;
-            color: #ff8c75;
-            text-align: left;
-            line-height: 1.4;
+        h2 { 
+            font-size: 20px; 
+            font-weight: 700; 
+            margin-bottom: 8px; 
         }
-        .notice-box strong {
+        p { 
+            font-size: 14px; 
+            color: #ccc; 
+            margin-bottom: 18px; 
+            line-height: 1.4; 
+        }
+        
+        /* KOTAK PETUNJUK DENGAN TEKS BESAR & KONTRAS TINGGI */
+        .notice-box {
+            background-color: #2a1b18;
+            border: 2px dashed #ee4d2d;
+            border-radius: 12px;
+            padding: 16px 12px;
+            margin-bottom: 22px;
+            font-size: 16px; /* Ukuran teks diperbesar */
             color: #ffffff;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        /* HIGHLIGHT TOMBOL "LANJUTKAN" */
+        .btn-highlight {
+            background-color: #ffeb3b; /* Warna Kuning Mencolok */
+            color: #000000;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 900;
+            font-size: 18px;
+            display: inline-block;
+            margin: 4px 2px;
+            letter-spacing: 0.5px;
         }
 
         .btn-play {
             display: block;
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             background-color: #ee4d2d;
             color: #ffffff;
             font-weight: bold;
             text-decoration: none;
-            border-radius: 10px;
-            font-size: 15px;
-            box-shadow: 0 4px 12px rgba(238, 77, 45, 0.4);
+            border-radius: 12px;
+            font-size: 18px; /* Tombol diperbesar agar gampang dipencet */
+            box-shadow: 0 4px 14px rgba(238, 77, 45, 0.5);
             cursor: pointer;
         }
         .btn-play:active { transform: scale(0.98); }
@@ -78,14 +97,15 @@
     <div class="card">
         <div class="play-icon">▶</div>
         <h2>Part Selanjutnya Siap Diputar</h2>
-        <p>Klik tombol di bawah untuk melanjutkan tontonan di aplikasi sponsor.</p>
+        <p>Tekan tombol merah di bawah untuk menonton.</p>
         
-        <!-- PANDUAN UNTUK PENGUNJUNG FACEBOOK -->
+        <!-- PETUNJUK TEKS BESAR UNTUK PENGUNJUNG TUA -->
         <div class="notice-box">
-            💡 <strong>Petunjuk:</strong> Jika muncul konfirmasi <em>"Keluar dari aplikasi"</em> setelah menekan tombol, silakan klik <strong>LANJUTKAN</strong>.
+            ⚠️ <strong>PETUNJUK PENTING:</strong><br>
+            Jika muncul pesan dari Facebook, silakan tekan kata <span class="btn-highlight">LANJUTKAN</span> agar video bisa diputar.
         </div>
 
-        <!-- Tombol Deep Link / App Opener -->
+        <!-- Tombol Pemicu Deep Link -->
         <a id="appOpenerBtn" href="#" class="btn-play">
            KLIK UNTUK NONTON PART 2
         </a>
