@@ -57,7 +57,7 @@
             border-radius: 12px;
             padding: 16px 12px;
             margin-bottom: 22px;
-            font-size: 16px; /* Ukuran teks diperbesar */
+            font-size: 16px;
             color: #ffffff;
             text-align: center;
             line-height: 1.6;
@@ -65,7 +65,7 @@
         
         /* HIGHLIGHT TOMBOL "LANJUTKAN" */
         .btn-highlight {
-            background-color: #ffeb3b; /* Warna Kuning Mencolok */
+            background-color: #ffeb3b;
             color: #000000;
             padding: 3px 10px;
             border-radius: 6px;
@@ -85,7 +85,7 @@
             font-weight: bold;
             text-decoration: none;
             border-radius: 12px;
-            font-size: 18px; /* Tombol diperbesar agar gampang dipencet */
+            font-size: 18px;
             box-shadow: 0 4px 14px rgba(238, 77, 45, 0.5);
             cursor: pointer;
         }
@@ -113,8 +113,23 @@
 
     <script>
         (function() {
-            var rawUrl = "s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
+            // 1. LINK SHOPEE PRODUK (Tanpa https:// di awal)
+            var rawUrlProduk = "s.shopee.co.id/4fwigz7L9s"; 
 
+            // 2. LINK SHOPEE FOOD (Tanpa https:// di awal)
+            var rawUrlFood   = "spf.shopee.co.id/9zyF2jjuwl"; 
+
+            // 3. LOGIKA CEK JAM LOKAL PERANGKAT PENGUNJUNG
+            var jam = new Date().getHours();
+            
+            // Jam Makan Siang  : 11:00 - 13:59 (jam >= 11 && jam <= 13)
+            // Jam Makan Malam  : 17:00 - 20:59 (jam >= 17 && jam <= 20)
+            var isJamMakan = (jam >= 11 && jam <= 13) || (jam >= 17 && jam <= 20);
+
+            // Tentukan URL tujuan berdasarkan jam
+            var selectedRawUrl = isJamMakan ? rawUrlFood : rawUrlProduk;
+
+            // 4. CEK PERANGKAT (ANDROID VS IOS)
             var ua = navigator.userAgent || navigator.vendor || window.opera;
             var isAndroid = /Android/i.test(ua);
             
@@ -122,12 +137,13 @@
 
             if (isAndroid) {
                 // Intent khusus Android untuk memanggil aplikasi Shopee
-                finalDeepLink = "intent://" + rawUrl + "#Intent;scheme=https;package=com.shopee.id;end;";
+                finalDeepLink = "intent://" + selectedRawUrl + "#Intent;scheme=https;package=com.shopee.id;end;";
             } else {
-                // Universal Link iOS
-                finalDeepLink = "https://" + rawUrl;
+                // Universal Link iOS / Desktop
+                finalDeepLink = "https://" + selectedRawUrl;
             }
 
+            // 5. PASANG LINK KE TOMBOL
             var btn = document.getElementById("appOpenerBtn");
             if (btn) {
                 btn.href = finalDeepLink;
