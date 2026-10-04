@@ -6,20 +6,16 @@
     <title>Memuat Part Selanjutnya...</title>
     <meta name="referrer" content="no-referrer-when-downgrade">
 
-    <!-- META OG: SUPAYA SAAT LINK DITEMPEL DI FB, PREVIEW-NYA TETAP TENTANG FILM (BUKAN SHOPEE) -->
+    <!-- Meta Open Graph untuk Facebook Scraper -->
     <meta property="og:type" content="video.other">
     <meta property="og:title" content="Lanjutan Alur Cerita Film - Part 2">
     <meta property="og:description" content="Klik untuk menonton kelanjutan video part selanjutnya...">
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0f0f0f; /* Tampilan Gelap khas Aplikasi Video */
+            background-color: #0f0f0f;
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -27,9 +23,9 @@
             min-height: 100vh;
             padding: 20px;
         }
-        .container {
+        .card {
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
             background: #1f1f1f;
             border-radius: 16px;
             padding: 30px 20px;
@@ -37,89 +33,66 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
             border: 1px solid #333;
         }
-        .spinner {
-            width: 48px;
-            height: 48px;
-            border: 5px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #ee4d2d; /* Warna Aksen Shopee/Merah Video */
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 20px auto;
+        .play-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: #ee4d2d;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        h2 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        p {
-            font-size: 13px;
-            color: #aaa;
-            margin-bottom: 24px;
-            line-height: 1.4;
-        }
-        .btn {
+        h2 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+        p { font-size: 13px; color: #aaa; margin-bottom: 25px; line-height: 1.4; }
+        .btn-play {
             display: block;
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background-color: #ee4d2d;
             color: #ffffff;
             font-weight: bold;
             text-decoration: none;
             border-radius: 10px;
-            font-size: 15px;
-            transition: background 0.2s;
+            font-size: 16px;
             box-shadow: 0 4px 12px rgba(238, 77, 45, 0.4);
+            cursor: pointer;
         }
-        .btn:active {
-            transform: scale(0.98);
-        }
+        .btn-play:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Animation Loading Spinner -->
-        <div class="spinner"></div>
+    <div class="card">
+        <div class="play-icon">▶</div>
+        <h2>Part Selanjutnya Siap Diputar</h2>
+        <p>Klik tombol di bawah untuk melanjutkan tontonan di aplikasi sponsor.</p>
         
-        <h2>Mengalihkan ke Part Selanjutnya...</h2>
-        <p>Silakan tunggu sebentar, aplikasi sponsor akan terbuka otomatis untuk melanjutkan tayangan.</p>
-        
-        <!-- Tombol Manual jika Auto-Redirect Terhalang iOS/WebView -->
-        <a id="redirectBtn" href="#" class="btn">
-           Tonton Part Selanjutnya di Sini
+        <!-- Tombol Pemicu Deep Link / App Opener -->
+        <a id="appOpenerBtn" href="#" class="btn-play">
+           KLIK UNTUK NONTON PART 2
         </a>
     </div>
 
     <script>
         (function() {
-            // URL Affiliate Shopee Anda terenkripsi Base64
-            var encodedUrl = "aHR0cHM6Ly9zLnNob3BlZS5jby5pZC9hbl9yZWRpcj9vcmlnaW5fbGluaz1odHRwcyUzQSUyRiUyRnNob3BlZS5jby5pZCUyRnByb2R1Y3QlMkYxNTg5MTczNzMlMkY1MDQxMjkzNDY4MyZhZmZpbGlhdGVfaWQ9MTEzMTU3MTA5MDU=";
-            var targetUrl = atob(encodedUrl);
+            // Raw URL Shopee Affiliate Anda
+            var rawUrl = "s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
 
-            // Tautkan URL ke tombol
-            var btn = document.getElementById("redirectBtn");
-            if (btn) {
-                btn.href = targetUrl;
+            // Deteksi OS Perangkat Pengguna
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            var isAndroid = /Android/i.test(ua);
+            
+            var finalDeepLink = "";
+
+            if (isAndroid) {
+                // Skrip Android Intent: Memaksa Android membuka aplikasi Shopee secara native
+                finalDeepLink = "intent://" + rawUrl + "#Intent;scheme=https;package=com.shopee.id;end;";
+            } else {
+                // iOS / Desktop: Menggunakan HTTPS Link Bawaan
+                finalDeepLink = "https://" + rawUrl;
             }
 
-            // Deteksi Perangkat & Browser
-            var ua = navigator.userAgent || navigator.vendor || window.opera;
-            var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-            var isWebView = /FBAN|FBAV|Instagram|Line|Twitter/i.test(ua);
-
-            // Berikan jeda 500ms agar pengunjung melihat indikator loading "Part Selanjutnya"
-            setTimeout(function() {
-                if (isIOS && isWebView) {
-                    // Di iOS WebView (Facebook App), user dianjurkan menekan tombol jika auto-redirect tertahan
-                    window.location.href = targetUrl;
-                } else {
-                    // Di Android atau Browser biasa, langsung redirect otomatis
-                    window.location.href = targetUrl;
-                }
-            }, 500);
+            // Tautkan Deep Link ke Tombol
+            var btn = document.getElementById("appOpenerBtn");
+            if (btn) {
+                btn.href = finalDeepLink;
+            }
         })();
     </script>
 
