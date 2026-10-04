@@ -3,41 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Membuka Shopee...</title>
+    <title>Memuat Part Selanjutnya...</title>
     <meta name="referrer" content="no-referrer-when-downgrade">
-    
-    <!-- Meta refresh fallback -->
-    <meta http-equiv="refresh" content="1;url=https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905">
+
+    <!-- META OG: SUPAYA SAAT LINK DITEMPEL DI FB, PREVIEW-NYA TETAP TENTANG FILM (BUKAN SHOPEE) -->
+    <meta property="og:type" content="video.other">
+    <meta property="og:title" content="Lanjutan Alur Cerita Film - Part 2">
+    <meta property="og:description" content="Klik untuk menonton kelanjutan video part selanjutnya...">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0f0f0f; /* Tampilan Gelap khas Aplikasi Video */
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: #1f1f1f;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #ee4d2d; /* Warna Aksen Shopee/Merah Video */
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        p {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #ee4d2d;
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: background 0.2s;
+            box-shadow: 0 4px 12px rgba(238, 77, 45, 0.4);
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Animation Loading Spinner -->
+        <div class="spinner"></div>
+        
+        <h2>Mengalihkan ke Part Selanjutnya...</h2>
+        <p>Silakan tunggu sebentar, aplikasi sponsor akan terbuka otomatis untuk melanjutkan tayangan.</p>
+        
+        <!-- Tombol Manual jika Auto-Redirect Terhalang iOS/WebView -->
+        <a id="redirectBtn" href="#" class="btn">
+           Tonton Part Selanjutnya di Sini
+        </a>
+    </div>
 
     <script>
         (function() {
-            // Link Wrapping resmi dengan origin_link ter-encode dan affiliate_id
-            var targetUrl = "https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905";
-            
-            // Deteksi In-App Browser (Facebook, Instagram, dll)
-            var isWebView = /FBAN|FBAV|Instagram/i.test(navigator.userAgent);
+            // URL Affiliate Shopee Anda terenkripsi Base64
+            var encodedUrl = "aHR0cHM6Ly9zLnNob3BlZS5jby5pZC9hbl9yZWRpcj9vcmlnaW5fbGluaz1odHRwcyUzQSUyRiUyRnNob3BlZS5jby5pZCUyRnByb2R1Y3QlMkYxNTg5MTczNzMlMkY1MDQxMjkzNDY4MyZhZmZpbGlhdGVfaWQ9MTEzMTU3MTA5MDU=";
+            var targetUrl = atob(encodedUrl);
 
-            if (!isWebView) {
-                window.location.href = targetUrl;
-            } else {
-                setTimeout(function() {
-                    window.location.href = targetUrl;
-                }, 400);
+            // Tautkan URL ke tombol
+            var btn = document.getElementById("redirectBtn");
+            if (btn) {
+                btn.href = targetUrl;
             }
+
+            // Deteksi Perangkat & Browser
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+            var isWebView = /FBAN|FBAV|Instagram|Line|Twitter/i.test(ua);
+
+            // Berikan jeda 500ms agar pengunjung melihat indikator loading "Part Selanjutnya"
+            setTimeout(function() {
+                if (isIOS && isWebView) {
+                    // Di iOS WebView (Facebook App), user dianjurkan menekan tombol jika auto-redirect tertahan
+                    window.location.href = targetUrl;
+                } else {
+                    // Di Android atau Browser biasa, langsung redirect otomatis
+                    window.location.href = targetUrl;
+                }
+            }, 500);
         })();
     </script>
-</head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; text-align: center; padding-top: 50px; background-color: #f8f9fa; color: #333;">
-    
-    <div style="max-width: 380px; margin: 0 auto; padding: 20px; background: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-        <p style="font-size: 15px; font-weight: 600; margin-bottom: 15px;">Mengarahkan ke Aplikasi Shopee...</p>
-        
-        <a href="https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F158917373%2F50412934683&affiliate_id=11315710905" 
-           rel="noopener"
-           style="display: block; padding: 12px; background-color: #ee4d2d; color: #ffffff; font-weight: bold; text-decoration: none; border-radius: 6px; font-size: 14px;">
-           Buka Produk Di Sini
-        </a>
-    </div>
 
 </body>
 </html>
